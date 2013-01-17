@@ -23,5 +23,7 @@ public class Person {
 	String email; 
 	
 	String name;
+
+	Long energy;
 	
 }
