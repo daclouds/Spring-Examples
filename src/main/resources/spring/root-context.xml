@@ -4,10 +4,13 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
@@ -55,4 +58,17 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	<jpa:repositories base-package="com.pmangplus.examples" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
+	
+	<cache:annotation-driven />
+<!-- 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager"> -->
+<!-- 		<property name="caches"> -->
+<!-- 			<set> -->
+<!-- 				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default" /> -->
+<!-- 				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="persons" /> -->
+<!-- 			</set> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cacheManager-ref="ehcache" />
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:configLocation="classpath:/ehcache.xml" />
+	
 </beans>

@@ -1,10 +1,15 @@
 package com.pmangplus.examples.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
 import com.pmangplus.examples.domain.Person;
+import com.pmangplus.examples.domain.QPerson;
 import com.pmangplus.examples.domain.Score;
 import com.pmangplus.examples.repository.PersonRepository;
 import com.pmangplus.examples.repository.ScoreRepository;
@@ -44,6 +49,14 @@ public class PersonServiceImpl implements PersonService {
 		
 		scoreRepository.save(score);
 		
+	}
+	
+	@Cacheable(value="persons")
+	@Override
+	public List<Person> findAll(String nameLike) {
+		QPerson $ = QPerson.person;
+		Iterable<Person> persons = personRepository.findAll($.name.like(nameLike+"%"));
+		return Lists.newArrayList(persons);
 	}
 	
 }

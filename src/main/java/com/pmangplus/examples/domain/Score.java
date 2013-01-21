@@ -16,8 +16,8 @@ public class Score {
 	Long id;
 	Long score;
 	
-//	public void setScore(Long score) {
-//		throw new UnsupportedOperationException();
-//	}
+	public void setScore(Long score) {
+		throw new UnsupportedOperationException();
+	}
 	
 }

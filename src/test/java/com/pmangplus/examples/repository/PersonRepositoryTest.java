@@ -2,6 +2,8 @@ package com.pmangplus.examples.repository;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Ignore;
@@ -11,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pmangplus.examples.domain.Person;
-import com.pmangplus.examples.domain.QPerson;
+import com.pmangplus.examples.service.PersonService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:/spring/root-context.xml")
@@ -19,6 +21,9 @@ public class PersonRepositoryTest {
 
 	@Inject
 	PersonRepository repository;
+	
+	@Inject
+	PersonService service;
 	
 	@Ignore
 	@Test
@@ -41,8 +46,7 @@ public class PersonRepositoryTest {
 	
 	@Test
 	public void testFind() throws Exception {
-		QPerson $ = QPerson.person;
-		Iterable<Person> persons = repository.findAll($.name.like("김%"));
+		List<Person> persons = service.findAll("김");
 		for (Person person : persons) {
 			System.out.println(person);
 		}
