@@ -60,15 +60,17 @@
 	<jpa:repositories base-package="com.pmangplus.examples" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
 	
 	<cache:annotation-driven />
-<!-- 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager"> -->
-<!-- 		<property name="caches"> -->
-<!-- 			<set> -->
-<!-- 				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default" /> -->
-<!-- 				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="persons" /> -->
-<!-- 			</set> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
+ 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+ 		<property name="caches">
+ 			<set>
+ 				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default" />
+ 				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="persons" />
+ 			</set>
+ 		</property>
+ 	</bean>
+	<!--
 	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cacheManager-ref="ehcache" />
 	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:configLocation="classpath:/ehcache.xml" />
+	-->
 	
 </beans>

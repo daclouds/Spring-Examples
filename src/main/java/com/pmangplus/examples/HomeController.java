@@ -36,4 +36,9 @@ public class HomeController {
 		return repository.findAll();
 	}
 	
+	@RequestMapping(value = "/person", method = RequestMethod.GET, headers="Accept=application/*")
+	public @ResponseBody Person findOne(Long id) {
+		return repository.findOne(id);
+	}
+	
 }

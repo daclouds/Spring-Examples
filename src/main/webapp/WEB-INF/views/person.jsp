@@ -72,10 +72,11 @@
 			var rows = '';
 			$.each(data, function(idx, e) {
 				var row = '<tr>'
-					+ '<td>'+ e.id +'</td>'
+					+ '<td>' + e.id + '</td>'
 					+ '<td>'+ e.name +'</td>'
 					+ '<td>'+ e.email +'</td>'
 					+ '<td>'+ e.energy +'</td>'
+					+ '<td><a href="person.xml?id='+ e.id +'">xml</a>&nbsp;/&nbsp;<a href="person.json?id='+ e.id +'">json</a></td>'
 					+ '</tr>';
 				rows += row;
 			});
